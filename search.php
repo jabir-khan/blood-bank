@@ -45,14 +45,15 @@
         
         <?php
         $output = "";
-        $start ="";
+        $blood ="";
+        $district = "";
         if (isset($_POST['donate'])) {
         //connect database
         $mysqli = NEW Mysqli("localhost","root", "", "donor");
-        $start = $mysqli->real_escape_string($_POST['start']);
-        $start1 = $mysqli->real_escape_string($_POST['start1']);
+        $blood = $mysqli->real_escape_string($_POST['blood']);
+        $district = $mysqli->real_escape_string($_POST['address']);
         //quert the database
-        $resultSet =$mysqli->query("SELECT * FROM donor_list WHERE blood = '$start' AND address='$start1'");
+        $resultSet =$mysqli->query("SELECT * FROM donor_list WHERE blood = '$blood' AND address='$district'");
         if($resultSet->num_rows >0){
         while($rows =$resultSet->fetch_assoc())
         {
@@ -79,107 +80,107 @@
       ?>
       
       
-      <nav class="navbar navbar-light bg-light m-5">
-        <a href="index.php" class="btn btn-info navbar-left"><i class="fa fa-arrow-left"></i></a>
+      <nav class="navbar navbar-danger bg-danger m-5">
+        <a href="index.php" class="btn border-light navbar-left"><i class="fa fa-arrow-left"></i></a>
         <form  method="post">
           <div class="form-group">
-            <select  class="custom-select" name="start">
+            <select  class="custom-select" name="blood">
               <option value="">Choose Blood Group</option>
-              <option value="A+ve" <?php if($start == 'A+ve')echo 'selected="selected"';?>>A+ve</option>
-              <option value="A-ve" <?php if($start == 'A-ve')echo 'selected="selected"';?>>A-ve</option>
-              <option value="B+ve" <?php if($start == 'B+ve')echo 'selected="selected"';?>>B+ve</option>
-              <option value="AB+ve" <?php if($start == 'AB+ve')echo 'selected="selected"';?>>AB+ve</option>
+              <option value="A+ve" <?php if($blood == 'A+ve')echo 'selected="selected"';?>>A+ve</option>
+              <option value="A-ve" <?php if($blood == 'A-ve')echo 'selected="selected"';?>>A-ve</option>
+              <option value="B+ve" <?php if($blood == 'B+ve')echo 'selected="selected"';?>>B+ve</option>
+              <option value="AB+ve" <?php if($blood == 'AB+ve')echo 'selected="selected"';?>>AB+ve</option>
               
 
 
-              <option value="AB-ve" <?php if($start == 'AB-ve')echo 'selected="selected"';?>>AB-ve</option>
-              <option value="B-ve" <?php if($start == 'B-ve')echo 'selected="selected"';?>>B-ve</option>
-              <option value="O+ve" <?php if($start == 'O+ve')echo 'selected="selected"';?>>O+ve</option>
-              <option value="O-ve" <?php if($start == 'O-ve')echo 'selected="selected"';?>>O-ve</option>
+              <option value="AB-ve" <?php if($blood == 'AB-ve')echo 'selected="selected"';?>>AB-ve</option>
+              <option value="B-ve" <?php if($blood == 'B-ve')echo 'selected="selected"';?>>B-ve</option>
+              <option value="O+ve" <?php if($blood == 'O+ve')echo 'selected="selected"';?>>O+ve</option>
+              <option value="O-ve" <?php if($blood == 'O-ve')echo 'selected="selected"';?>>O-ve</option>
             </select>
           </div>
           <div class="form-group">
-            <select  class="custom-select" name="start1">
+            <select  class="custom-select" name="address">
               <option value="">Choose District</option>
-              <option value="Bhaktapur" <?php if($start == 'Bhaktapur')echo 'selected="selected"';?>>Bhaktapur         </option>
-              <option value="Dhading" <?php if($start == 'Dhading')echo 'selected="selected"';?>>Dhading             </option>
-              <option value="Kathmandu" <?php if($start == 'Kathmandu')echo 'selected="selected"';?>>Kathmandu           </option>
-              <option value="Kavrepalanchok" <?php if($start == 'Kavrepalanchok')echo 'selected="selected"';?>>Kavrepalanchok      </option>
-              <option value="Lalitpur" <?php if($start == 'Lalitpur')echo 'selected="selected"';?>>Lalitpur            </option>
-              <option value="Nuwakot" <?php if($start == 'Nuwakot')echo 'selected="selected"';?>>Nuwakot             </option>
-              <option value="Rasuwa" <?php if($start == 'Rasuwa')echo 'selected="selected"';?>>Rasuwa              </option>
-              <option value="Sindhupalchok" <?php if($start == 'Sindhupalchok')echo 'selected="selected"';?>>Sindhupalchok       </option>
-              <option value="Banke" <?php if($start == 'Banke')echo 'selected="selected"';?>>Banke               </option>
-              <option value="Bardiya" <?php if($start == 'Bardiya')echo 'selected="selected"';?>>Bardiya             </option>
-              <option value="Dailekh" <?php if($start == 'Dailekh')echo 'selected="selected"';?>>Dailekh             </option>
-              <option value="Jajarkot" <?php if($start == 'Jajarkot')echo 'selected="selected"';?>>Jajarkot            </option>
-              <option value="Surkhet" <?php if($start == 'Surkhet')echo 'selected="selected"';?>>Surkhet             </option>
-              <option value="Baglung" <?php if($start == 'Baglung')echo 'selected="selected"';?>>Baglung             </option>
-              <option value="Mustang" <?php if($start == 'Mustang')echo 'selected="selected"';?>>Mustang             </option>
-              <option value="Myagdi" <?php if($start == 'Myagdi')echo 'selected="selected"';?>>Myagdi              </option>
-              <option value="Parbat"<?php if($start == 'Parbat')echo 'selected="selected"';?>>Parbat              </option>
-              <option value="Gorkha"<?php if($start == 'Gorkha')echo 'selected="selected"';?>>Gorkha              </option>
-              <option value="Kaski"<?php if($start == 'Kaski')echo 'selected="selected"';?>>Kaski               </option>
-              <option value="Lamjung"<?php if($start == 'Lamjung')echo 'selected="selected"';?>>Lamjung             </option>
-              <option value="Manang"<?php if($start == 'Manang')echo 'selected="selected"';?>>Manang              </option>
-              <option value="Syangja"<?php if($start == 'Syangja')echo 'selected="selected"';?>>Syangja             </option>
-              <option value="Tanahu"<?php if($start == 'Tanahu')echo 'selected="selected"';?>>Tanahu              </option>
-              <option value="Dhanusa"<?php if($start == 'Dhanusa')echo 'selected="selected"';?>>Dhanusa             </option>
-              <option value="Dolakha"<?php if($start == 'Dolakha')echo 'selected="selected"';?>>Dolakha             </option>
-              <option value="Mahottari"<?php if($start == 'Mahottari')echo 'selected="selected"';?>>Mahottari           </option>
-              <option value="Ramechhap"<?php if($start == 'Ramechhap')echo 'selected="selected"';?>>Ramechhap           </option>
-              <option value="Sarlahi"<?php if($start == 'Sarlahi')echo 'selected="selected"';?>>Sarlahi             </option>
-              <option value="Sindhuli"<?php if($start == 'Sindhuli')echo 'selected="selected"';?>>Sindhuli            </option>
-              <option value="Dolpa"<?php if($start == 'Dolpa')echo 'selected="selected"';?>>Dolpa               </option>
-              <option value="Humla"<?php if($start == 'Humla')echo 'selected="selected"';?>>Humla               </option>
-              <option value="Jumla"<?php if($start == 'Jumla')echo 'selected="selected"';?>>Jumla               </option>
-              <option value="Kalikot"<?php if($start == 'Kalikot')echo 'selected="selected"';?>>Kalikot             </option>
-              <option value="Mugu"<?php if($start == 'Mugu')echo 'selected="selected"';?>>Mugu                </option>
-              <option value="Bhojpur"<?php if($start == 'Bhojpur')echo 'selected="selected"';?>>Bhojpur             </option>
-              <option value="Dhankuta"<?php if($start == 'Dhankuta')echo 'selected="selected"';?>>Dhankuta            </option>
-              <option value="Morang"<?php if($start == 'Morang')echo 'selected="selected"';?>>Morang              </option>
-              <option value="Sankhuwasabha"<?php if($start == 'Sankhuwasabha')echo 'selected="selected"';?>>Sankhuwasabha       </option>
-              <option value="Sunsari"<?php if($start == 'Sunsari')echo 'selected="selected"';?>>Sunsari             </option>
-              <option value="Terhathum"<?php if($start == 'Terhathum')echo 'selected="selected"';?>>Terhathum           </option>
-              <option value="Arghakhanchi"<?php if($start == 'Arghakhanchi')echo 'selected="selected"';?>>Arghakhanchi        </option>
-              <option value="Gulmi"<?php if($start == 'Gulmi')echo 'selected="selected"';?>>Gulmi               </option>
-              <option value="Kapilvastu"<?php if($start == 'Kapilvastu')echo 'selected="selected"';?>>Kapilvastu          </option>
-              <option value="Nawalparasi"<?php if($start == 'Nawalparasi')echo 'selected="selected"';?>>Nawalparasi         </option>
-              <option value="Palpa"<?php if($start == 'Palpa')echo 'selected="selected"';?>>Palpa               </option>
-              <option value="Rupandehi"<?php if($start == 'Rupandehi')echo 'selected="selected"';?>>Rupandehi           </option>
-              <option value="Baitadi"<?php if($start == 'Baitadi')echo 'selected="selected"';?>>Baitadi             </option>
-              <option value="Dadeldhura"<?php if($start == 'Dadeldhura')echo 'selected="selected"';?>>Dadeldhura          </option>
-              <option value="Darchula"<?php if($start == 'Darchula')echo 'selected="selected"';?>>Darchula            </option>
-              <option value="Kanchanpur"<?php if($start == 'Kanchanpur')echo 'selected="selected"';?>>Kanchanpur          </option>
-              <option value="Ilam"<?php if($start == 'Ilam')echo 'selected="selected"';?>>Ilam                </option>
-              <option value="Jhapa"<?php if($start == 'Jhapa')echo 'selected="selected"';?>>Jhapa               </option>
-              <option value="Panchthar"<?php if($start == 'Panchthar')echo 'selected="selected"';?>>Panchthar           </option>
-              <option value="Taplejung"<?php if($start == 'Taplejung')echo 'selected="selected"';?>>Taplejung           </option>
-              <option value="Bara"<?php if($start == 'Bara')echo 'selected="selected"';?>>Bara                </option>
-              <option value="Chitwan"<?php if($start == 'Chitwan')echo 'selected="selected"';?>>Chitwan             </option>
-              <option value="Makwanpur"<?php if($start == 'Makwanpur')echo 'selected="selected"';?>>Makwanpur           </option>
-              <option value="Parsa"<?php if($start == 'Parsa')echo 'selected="selected"';?>>Parsa               </option>
-              <option value="Rautahat"<?php if($start == 'Rautahat')echo 'selected="selected"';?>>Rautahat            </option>
-              <option value="Dang"<?php if($start == 'Dang')echo 'selected="selected"';?>>Dang                </option>
-              <option value="Pyuthan"<?php if($start == 'Pyuthan')echo 'selected="selected"';?>>Pyuthan             </option>
-              <option value="Rolpa"<?php if($start == 'Rolpa')echo 'selected="selected"';?>>Rolpa               </option>
-              <option value="Rukum"<?php if($start == 'Rukum')echo 'selected="selected"';?>>Rukum               </option>
-              <option value="Salyan"<?php if($start == 'Salyan')echo 'selected="selected"';?>>Salyan              </option>
-              <option value="Khotang"<?php if($start == 'Khotang')echo 'selected="selected"';?>>Khotang             </option>
-              <option value="Okhaldhunga"<?php if($start == 'Okhaldhunga')echo 'selected="selected"';?>>Okhaldhunga         </option>
-              <option value="Saptari"<?php if($start == 'Saptari')echo 'selected="selected"';?>>Saptari             </option>
-              <option value="Siraha"<?php if($start == 'Siraha')echo 'selected="selected"';?>>Siraha              </option>
-              <option value="Solukhumbu"<?php if($start == 'Solukhumbu')echo 'selected="selected"';?>>Solukhumbu          </option>
-              <option value="Udayapur"<?php if($start == 'Udayapur')echo 'selected="selected"';?>>Udayapur            </option>
-              <option value="Achham"<?php if($start == 'Achham')echo 'selected="selected"';?>>Achham              </option>
-              <option value="Bajhang"<?php if($start == 'Bajhang')echo 'selected="selected"';?>>Bajhang             </option>
-              <option value="Bajura"<?php if($start == 'Bajura')echo 'selected="selected"';?>>Bajura              </option>
-              <option value="Doti"<?php if($start == 'Doti')echo 'selected="selected"';?>>Doti                </option>
-              <option value="Kailali"<?php if($start == 'Kailali')echo 'selected="selected"';?>>Kailali             </option>
+              <option value="Bhaktapur" <?php if($district == 'Bhaktapur')echo 'selected="selected"';?>>Bhaktapur         </option>
+              <option value="Dhading" <?php if($district == 'Dhading')echo 'selected="selected"';?>>Dhading             </option>
+              <option value="Kathmandu" <?php if($district == 'Kathmandu')echo 'selected="selected"';?>>Kathmandu           </option>
+              <option value="Kavrepalanchok" <?php if($district == 'Kavrepalanchok')echo 'selected="selected"';?>>Kavrepalanchok      </option>
+              <option value="Lalitpur" <?php if($district == 'Lalitpur')echo 'selected="selected"';?>>Lalitpur            </option>
+              <option value="Nuwakot" <?php if($district == 'Nuwakot')echo 'selected="selected"';?>>Nuwakot             </option>
+              <option value="Rasuwa" <?php if($district == 'Rasuwa')echo 'selected="selected"';?>>Rasuwa              </option>
+              <option value="Sindhupalchok" <?php if($district == 'Sindhupalchok')echo 'selected="selected"';?>>Sindhupalchok       </option>
+              <option value="Banke" <?php if($district == 'Banke')echo 'selected="selected"';?>>Banke               </option>
+              <option value="Bardiya" <?php if($district == 'Bardiya')echo 'selected="selected"';?>>Bardiya             </option>
+              <option value="Dailekh" <?php if($district == 'Dailekh')echo 'selected="selected"';?>>Dailekh             </option>
+              <option value="Jajarkot" <?php if($district == 'Jajarkot')echo 'selected="selected"';?>>Jajarkot            </option>
+              <option value="Surkhet" <?php if($district == 'Surkhet')echo 'selected="selected"';?>>Surkhet             </option>
+              <option value="Baglung" <?php if($district == 'Baglung')echo 'selected="selected"';?>>Baglung             </option>
+              <option value="Mustang" <?php if($district == 'Mustang')echo 'selected="selected"';?>>Mustang             </option>
+              <option value="Myagdi" <?php if($district == 'Myagdi')echo 'selected="selected"';?>>Myagdi              </option>
+              <option value="Parbat"<?php if($district == 'Parbat')echo 'selected="selected"';?>>Parbat              </option>
+              <option value="Gorkha"<?php if($district == 'Gorkha')echo 'selected="selected"';?>>Gorkha              </option>
+              <option value="Kaski"<?php if($district == 'Kaski')echo 'selected="selected"';?>>Kaski               </option>
+              <option value="Lamjung"<?php if($district == 'Lamjung')echo 'selected="selected"';?>>Lamjung             </option>
+              <option value="Manang"<?php if($district == 'Manang')echo 'selected="selected"';?>>Manang              </option>
+              <option value="Syangja"<?php if($district == 'Syangja')echo 'selected="selected"';?>>Syangja             </option>
+              <option value="Tanahu"<?php if($district == 'Tanahu')echo 'selected="selected"';?>>Tanahu              </option>
+              <option value="Dhanusa"<?php if($district == 'Dhanusa')echo 'selected="selected"';?>>Dhanusa             </option>
+              <option value="Dolakha"<?php if($district == 'Dolakha')echo 'selected="selected"';?>>Dolakha             </option>
+              <option value="Mahottari"<?php if($district == 'Mahottari')echo 'selected="selected"';?>>Mahottari           </option>
+              <option value="Ramechhap"<?php if($district == 'Ramechhap')echo 'selected="selected"';?>>Ramechhap           </option>
+              <option value="Sarlahi"<?php if($district == 'Sarlahi')echo 'selected="selected"';?>>Sarlahi             </option>
+              <option value="Sindhuli"<?php if($district == 'Sindhuli')echo 'selected="selected"';?>>Sindhuli            </option>
+              <option value="Dolpa"<?php if($district == 'Dolpa')echo 'selected="selected"';?>>Dolpa               </option>
+              <option value="Humla"<?php if($district == 'Humla')echo 'selected="selected"';?>>Humla               </option>
+              <option value="Jumla"<?php if($district == 'Jumla')echo 'selected="selected"';?>>Jumla               </option>
+              <option value="Kalikot"<?php if($district == 'Kalikot')echo 'selected="selected"';?>>Kalikot             </option>
+              <option value="Mugu"<?php if($district == 'Mugu')echo 'selected="selected"';?>>Mugu                </option>
+              <option value="Bhojpur"<?php if($district == 'Bhojpur')echo 'selected="selected"';?>>Bhojpur             </option>
+              <option value="Dhankuta"<?php if($district == 'Dhankuta')echo 'selected="selected"';?>>Dhankuta            </option>
+              <option value="Morang"<?php if($district == 'Morang')echo 'selected="selected"';?>>Morang              </option>
+              <option value="Sankhuwasabha"<?php if($district == 'Sankhuwasabha')echo 'selected="selected"';?>>Sankhuwasabha       </option>
+              <option value="Sunsari"<?php if($district == 'Sunsari')echo 'selected="selected"';?>>Sunsari             </option>
+              <option value="Terhathum"<?php if($district == 'Terhathum')echo 'selected="selected"';?>>Terhathum           </option>
+              <option value="Arghakhanchi"<?php if($district == 'Arghakhanchi')echo 'selected="selected"';?>>Arghakhanchi        </option>
+              <option value="Gulmi"<?php if($district == 'Gulmi')echo 'selected="selected"';?>>Gulmi               </option>
+              <option value="Kapilvastu"<?php if($district == 'Kapilvastu')echo 'selected="selected"';?>>Kapilvastu          </option>
+              <option value="Nawalparasi"<?php if($district == 'Nawalparasi')echo 'selected="selected"';?>>Nawalparasi         </option>
+              <option value="Palpa"<?php if($district == 'Palpa')echo 'selected="selected"';?>>Palpa               </option>
+              <option value="Rupandehi"<?php if($district == 'Rupandehi')echo 'selected="selected"';?>>Rupandehi           </option>
+              <option value="Baitadi"<?php if($district == 'Baitadi')echo 'selected="selected"';?>>Baitadi             </option>
+              <option value="Dadeldhura"<?php if($district == 'Dadeldhura')echo 'selected="selected"';?>>Dadeldhura          </option>
+              <option value="Darchula"<?php if($district == 'Darchula')echo 'selected="selected"';?>>Darchula            </option>
+              <option value="Kanchanpur"<?php if($district == 'Kanchanpur')echo 'selected="selected"';?>>Kanchanpur          </option>
+              <option value="Ilam"<?php if($district == 'Ilam')echo 'selected="selected"';?>>Ilam                </option>
+              <option value="Jhapa"<?php if($district == 'Jhapa')echo 'selected="selected"';?>>Jhapa               </option>
+              <option value="Panchthar"<?php if($district == 'Panchthar')echo 'selected="selected"';?>>Panchthar           </option>
+              <option value="Taplejung"<?php if($district == 'Taplejung')echo 'selected="selected"';?>>Taplejung           </option>
+              <option value="Bara"<?php if($district == 'Bara')echo 'selected="selected"';?>>Bara                </option>
+              <option value="Chitwan"<?php if($district == 'Chitwan')echo 'selected="selected"';?>>Chitwan             </option>
+              <option value="Makwanpur"<?php if($district == 'Makwanpur')echo 'selected="selected"';?>>Makwanpur           </option>
+              <option value="Parsa"<?php if($district == 'Parsa')echo 'selected="selected"';?>>Parsa               </option>
+              <option value="Rautahat"<?php if($district == 'Rautahat')echo 'selected="selected"';?>>Rautahat            </option>
+              <option value="Dang"<?php if($district == 'Dang')echo 'selected="selected"';?>>Dang                </option>
+              <option value="Pyuthan"<?php if($district == 'Pyuthan')echo 'selected="selected"';?>>Pyuthan             </option>
+              <option value="Rolpa"<?php if($district == 'Rolpa')echo 'selected="selected"';?>>Rolpa               </option>
+              <option value="Rukum"<?php if($district == 'Rukum')echo 'selected="selected"';?>>Rukum               </option>
+              <option value="Salyan"<?php if($district == 'Salyan')echo 'selected="selected"';?>>Salyan              </option>
+              <option value="Khotang"<?php if($district == 'Khotang')echo 'selected="selected"';?>>Khotang             </option>
+              <option value="Okhaldhunga"<?php if($district == 'Okhaldhunga')echo 'selected="selected"';?>>Okhaldhunga         </option>
+              <option value="Saptari"<?php if($district == 'Saptari')echo 'selected="selected"';?>>Saptari             </option>
+              <option value="Siraha"<?php if($district == 'Siraha')echo 'selected="selected"';?>>Siraha              </option>
+              <option value="Solukhumbu"<?php if($district == 'Solukhumbu')echo 'selected="selected"';?>>Solukhumbu          </option>
+              <option value="Udayapur"<?php if($district == 'Udayapur')echo 'selected="selected"';?>>Udayapur            </option>
+              <option value="Achham"<?php if($district == 'Achham')echo 'selected="selected"';?>>Achham              </option>
+              <option value="Bajhang"<?php if($district == 'Bajhang')echo 'selected="selected"';?>>Bajhang             </option>
+              <option value="Bajura"<?php if($district == 'Bajura')echo 'selected="selected"';?>>Bajura              </option>
+              <option value="Doti"<?php if($district == 'Doti')echo 'selected="selected"';?>>Doti                </option>
+              <option value="Kailali"<?php if($district == 'Kailali')echo 'selected="selected"';?>>Kailali             </option>
             </select>
           </div>
           
-          <button class="btn" style="background-color: #dc3545; color: #fff;" type="submit" name="donate" value="Search">Search</button>
+          <button class="btn border-light" style="background-color: #dc3545; color: #fff;" type="submit" name="donate" value="Search">Search</button>
           
         </form>
       </nav>

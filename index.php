@@ -1,3 +1,4 @@
+<?php include('register.php');?>
 <!DOCTYPE html>
 <head>
     <meta name="author" content="KHAN & Team">
@@ -6,20 +7,22 @@
     <title>Save Life Nepal | I donate | I Save</title>
     <link rel="icon" href="b.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="login">
-    
-<a href="search.php" class="btn btn-danger btn-user btn-block"   name="submit"  type="submit" >Search Blood</a>
+<body class="login"> 
     
     
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
+
+
             <div class="col-xl-6 col-lg-6 col-md-6">
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                 <a href="search.php" class="btn btn-danger btn-user btn-block mt-5">Search Blood <i class="fa fa-search"></i></a>
+
+                <div class="card o-hidden border-0 shadow-lg my-3">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
@@ -27,15 +30,21 @@
                             <div class="col-lg-12">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 m-4">Become a Donor</h1>
-                                    <p >Want to save a life ? Please fill the form & become a life saver. </p>
-                                </div>
-                                <div class="p-5">
-                                    <form id="login" action="register.php" method="post" class="user" >
+                            <p >Want to save a life ? Please fill the form & become a life saver. </p> 
+                         <div class="alert alert-success alert-dismissible fade show  m-5" role="alert">
+                                <p><?php echo $success ?></p>                                             
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>   
+                                 <div class="p-5">
+                                    <form id="reg-form"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="user" >
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control form-control-user" placeholder=" Name">
+                                            <input type="text" name="name" id="name" class="form-control form-control-user" placeholder=" Name" value="<?= $name ?>" >
+                                            <span class="error"><?php echo $nameErr ?></span>
                                         </div>
                                         <div class="form-group">
-                                            <select id="select2"  name="blood" class="form-control" required>
+                                            <select id="blood"  name="blood" class="form-control" value="<?= $blood ?>">
                                                 <option >Choose Blood Group</option>
                                                 <option value="A+ve">A+ve</option>
                                                 <option value="A-Ve">A-Ve</option>
@@ -46,10 +55,11 @@
                                                 <option value="O+ve">O+ve</option>
                                                 <option value="O-ve">O-ve</option>
                                             </select>
+                                             <span class="error"><?php echo $bloodErr ?></span>
                                         </div>
                                         <div class="form-group">
                                             
-                                            <select id="select2"  name="address" class="form-control" required  >
+                                        <select id="address"  name="address" class="form-control"  value="<?= $address ?>" >
                                                 
                                                 <option >Choose District</option>
                                                 <option value="Bhaktapur">Bhaktapur         </option>
@@ -127,21 +137,30 @@
                                                 <option value="Bajura">Bajura              </option>
                                                 <option value="Doti">Doti                </option>
                                                 <option value="Kailali">Kailali             </option>
-                                            </select>
+                                        S</select>
+                                         <span class="error"><?php echo $addressErr ?></span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email">
+                                            <input type="text" class="form-control form-control-user" name="email" id="email" placeholder="Email" value="<?= $email ?>">
+                                             <span class="error"><?php echo $emailErr ?></span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="contact" placeholder="Contact">
+                                            <input type="text" class="form-control form-control-user" name="contact" id="contact" placeholder="Contact" value="<?= $contact ?>" >
+                                             <span class="error"><?php echo $contactErr ?></span>
                                         </div>
                                         
                                         
-                                        <button style="background-color: #dc3545; color: #fff;" name="donate"  type="submit" class="btn  btn-user btn-block">
+                                        <button style="background-color: #dc3545; color: #fff;" name="submit"  type="submit"  id="register" class="btn  btn-user btn-block">
                                         Become a donor
-                                        </button>                                       
+                                        </button>
                                         
                                     </form>
+
+                                    <hr>                                 
+                                  <div class="text-center">
+                                    <a class="small" href="Https://lvftechnology.com">I will be a saver</a>
+                                  </div>
+
                                     
                                     
                                 </div>
@@ -152,11 +171,43 @@
             </div>
         </div>
     </div>
-    <div id="footer" class="col-lg-12">
-        <a href="https://www.facebook.com" class="fa fa-facebook"></a>
-        <a href="https://www.gmail.com/" class="fa fa-google"></a>
-        <a href="https://www.twitter.com" class="fa fa-twitter"></a>
-        <a href="https://www.instagram.com" class="fa fa-instagram"></a>
-    </div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script >
+    var success = '<?php echo $success ?>';
+    if(success !==""){
+        $(".alert").delay(2000).slideUp(200, function() {
+        $(this).alert('close');
+        });
+    }else{
+        $('.alert').hide();
+    }
+</script>
+
+    <!-- <script>
+    $(function() {
+
+    $('#register').click(function(event){
+                event.preventDefault();
+                var formData = $('#reg-form').serialize();
+                console.log(formData);
+                $.ajax({
+                    url: 'register.php',
+                    method: 'post',
+                    data: formData + '&action=register'
+                }).done(function(result){
+                    $('.alert').show();
+                    $('#result').html(result);
+                })
+            })
+
+});
+</script> -->
+
+ <a  class="btn btn-danger btn-user btn-block text-white" > &copy; <script>document.write(new Date().getFullYear());</script> | All Rights Reserved</a>
+    
 </body>
 </html>
