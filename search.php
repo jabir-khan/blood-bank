@@ -4,7 +4,7 @@
     <head>
       <title>Save Life Nepal | I donate | I Save</title>
       <link rel="icon" href="b.png" type="image/x-icon">
-      <link rel="stylesheet" href="style.css" type="text/css" />
+      <link rel="stylesheet" href="css/style.css" type="text/css" />
       <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

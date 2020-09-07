@@ -2,9 +2,12 @@
 //print_r($_POST);
 
 // define variables and set to empty values
+$get_email= '';
 $success ='';
+$email_error= '';
 $nameErr = $bloodErr = $addressErr =  $emailErr = $contactErr ='';
 $name = $blood = $address = $email = $contact ='';
+//get current date time
 $created_at = date("Y-m-d h:i:s");
 
 // if(isset($_POST['submit'])) {
@@ -65,21 +68,32 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		      $contactErr = "Invalid contact number"; 
 		    }
 		  }
-	//if there is not any validation then lets insert data
-	if ($nameErr =='' and $bloodErr =='' and $addressErr == '' and $emailErr == '' and $contactErr == ''){
-		//clear all the input values
-		unset($_POST['submit']);
-		require_once('db_connect.php');
-		$sql = "INSERT INTO donor_list(name, blood, address, email, contact, date_time ) VALUES(?,?,?,?,?,?)";
-		$insert = $db->prepare($sql);
-		$result = $insert->execute([ $name, $blood, $address, $email, $contact, $created_at]);
 
-		if($result){
-		$success = "Thank you for your support.";
-      	$name = $email = $address = $phone = $message ="";		
+		require_once('db_connect.php');	
+		$stmt = $db->prepare("SELECT email FROM donor_list WHERE email= ?");
+		$stmt->execute([$email]);
+		$get_email = $stmt->fetchColumn(); 
+
+	//if there is not any validation error then lets insert data
+	if ($nameErr =='' and $bloodErr =='' and $addressErr == '' and $emailErr == '' and $contactErr == ''){
+
+		if($get_email != $email){
+			//clear all the input values
+			unset($_POST['submit']);		
+			$sql = "INSERT INTO donor_list(name, blood, address, email, contact, date_time ) VALUES(?,?,?,?,?,?)";
+			$insert = $db->prepare($sql);
+			$result = $insert->execute([ $name, $blood, $address, $email, $contact, $created_at]);
+			if($result){
+			$success = "Thank you for your support.";
+	      	$name = $email = $address = $phone = $message ="";		
+			}else{
+			echo "Oops something went wrong.";
+			}
+
 		}else{
-		echo "Oops something went wrong.";
+			$email_error = 'Email already exists.';
 		}
+		
 
 	}
 
